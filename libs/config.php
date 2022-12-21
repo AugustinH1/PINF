@@ -4,6 +4,6 @@
 $BDD_host="localhost";
 $BDD_user="root";
 $BDD_password="";
-$BDD_base="PINF_TEST";
+$BDD_base="bdd-pinf";
 
 ?>

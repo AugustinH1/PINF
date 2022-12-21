@@ -2,24 +2,43 @@
 
 include_once "maLibSQL.pdo.php";
 
-function getPersonne()
+function getMachineActive()
 {
+    $SQL = "Select *
+            From machine
+            Where active_ou_non = 1";
 
-	$sql="SELECT *
-			FROM personne";
-
-	
-	return parcoursRs(SQLSelect($sql));
+    return parcoursRs(SQLSelect($SQL));
 
 }
 
-function addPersonne($nom){
+function getImpactTypeMachine($typeMachine){
+    $SQL = "Select *
+            From impact
+            Where type_machine = '$typeMachine'";
 
-	$sql = "INSERT INTO personne(nom)
-	        VALUES ('$nom');";
-  
-  	SQLInsert($sql);
+    return parcoursRs(SQLSelect($SQL));
+
 }
 
+function getProchaineIdTicket(){
+    $SQL = "Select MAX(id)+1 as id
+            From ticket";
+
+            
+    return SQLGetChamp($SQL);
+}
+
+function connectionValide($email,$mdp){
+
+    $SQL = "Select id
+            From compte
+            Where email = '$email'
+            AND mdp = '$mdp'";
+
+    return SQLGetChamp($SQL);
+
+
+}
 
 ?>
