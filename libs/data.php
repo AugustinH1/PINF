@@ -38,6 +38,36 @@ if($nomFonction == "connectionValide"){
 
 }
 
+if($nomFonction == "getListeDiffusion"){
+    
+    echo json_encode( getListeDiffusion() );
+
+}
+
+if($nomFonction == "getPersonneListeDiffusion"){
+    echo json_encode( getPersonneListeDiffusion( $_GET['idListeDiffusion']) );
+
+}
+
+if($nomFonction == "addListeDiffusion"){
+    echo json_encode( addListeDiffusion() );
+
+}
+
+if($nomFonction == "addPersonneListeDiffusion"){
+    echo json_encode( addPersonneListeDiffusion( $_GET['idListeDiffusion'], $_GET['email'] ) );
+
+}
+
+if($nomFonction == "supprPersonneListeDiffusion"){
+    echo json_encode( supprPersonneListeDiffusion( $_GET['email'] ) );
+
+}
+
+
+
+
+
 
 
     

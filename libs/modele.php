@@ -41,4 +41,60 @@ function connectionValide($email,$mdp){
 
 }
 
+function getListeDiffusion(){
+
+    $SQL = "Select *
+            From liste_diffusion";
+
+    return parcoursRs(SQLSelect($SQL));
+
+}
+
+function getPersonneListeDiffusion($idListeDiffusion){
+
+    $SQL = "Select *
+            From contact
+            Where id = '$idListeDiffusion'";
+
+    return parcoursRs(SQLSelect($SQL));
+
+}
+
+function addListeDiffusion(){
+    $SQL = "Select MAX(numero)+1
+            From liste_diffusion";
+
+    $numero = SQLGetChamp($SQL);
+    
+    $SQL = "Insert into liste_diffusion (numero)
+            Values ('$numero')";
+
+    return SQLInsert($SQL);
+
+}
+
+function addPersonneListeDiffusion($id,$email){
+    $SQL = "Insert into contact (id,personne_a_contacter)
+            Values ('$id' , '$email')";
+
+
+    return SQLInsert($SQL);
+
+}
+
+function supprPersonneListeDiffusion($email){
+    $SQL = "Delete From contact
+            Where personne_a_contacter = '$email'";
+
+
+    return SQLDelete($SQL);
+
+}
+
+
+
+
+
+
+
 ?>

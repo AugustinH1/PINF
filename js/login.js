@@ -6,7 +6,7 @@ var cssLink = $("<p>")
 
 
 var email = $("<input>").attr("type", "input").attr("placeholder", "email");
-var mdp = $("<input>").attr("type", "input").attr("placeholder", "mdp");
+var mdp = $("<input>").attr("type", "password").attr("placeholder", "mdp");
 
 var mdpLost = cssLink.html("mot de passe oubli&eacute")
                     
