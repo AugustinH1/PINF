@@ -8,6 +8,7 @@ $(document).ready(function(){
     //initilaisation de l'état de la page initiale
     $("#newTicket").hide();
     $("#Ticket").hide();
+    $("#listeDiffusion").hide();
 
 
     //click sur le bouton connecter
@@ -20,7 +21,7 @@ $(document).ready(function(){
                 data: {"nomFonction" : "connectionValide" , "email" : email.val() , "mdp" : mdp.val()},
                 success: 
                 function(oRep){
-                    console.log(oRep);
+                    //console.log(oRep);
                     if(oRep == false){
                         $("#login").append( errorText.html("incorrect") )
                         return;
@@ -30,6 +31,8 @@ $(document).ready(function(){
                     $("#newTicket").show();
                     $("#Ticket").show();
                     $("#login").hide();
+                    $("#listeDiffusion").show();
+
                     
                       
                 },

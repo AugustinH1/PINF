@@ -1,23 +1,47 @@
 
+/**
+ * tableau contenant toute les listes de diffusion
+ */
 var tabListeDiffusion = $("<table>")
+
+/**
+ * élement pour création du tableau
+ */
 var refTrLD = $("<tr>").css("cursor" , "pointer" )
 
+
+/**
+ * tableau contenant toute les email
+ */
 var tabEmail = $("<table>");
+/**
+ * élement pour création du tableau
+ */
 var refTrE = $("<tr>")
 
-
+/**
+ * bouton plus pour ajouter des listes de diffusion
+ */
 var BpPlusLD = $("<input>").attr("type", "button").val("+");
 
 
+/**
+ * bouton plus pour ajouter des email a une liste de diffusion
+ */
 var BpPlusE = $("<input>").attr("type", "button").val("+");
+/**
+ * champs de text pour l'ajout des listes de diffusion
+ */
 var ListeDiffusionEmail = $("<input>").attr("type", "input").attr("placeholder", "email");
-
+/**
+ * bouton pour supprimer un email de la liste de diffusion
+ */
 var BpMoins = $("<input>").attr("type", "button").val("-");
 
 
 
 
-$(document).ready(function(){
+connection.click(function(){
 
 $("#listeDiffusion")
     .append(tabListeDiffusion)
@@ -28,7 +52,9 @@ getListeDiffusion();
 
 
 
-
+/**
+ * fonction qui recupere les listes de diffusion et les affiches
+ */
 function getListeDiffusion(){
     $.ajax({
         type: "GET",
@@ -42,7 +68,7 @@ function getListeDiffusion(){
             //on met le tableau en ordre
             oRep.sort(function(a,b){return a.numero-b.numero});
 
-            console.log(oRep);
+            //console.log(oRep);
 
 
             for (let i = 0; i < oRep.length; i++) {
@@ -65,6 +91,9 @@ function getListeDiffusion(){
     
 }
 
+/**
+ * fonction qui recupère les personne dans les liste de diffusion et les affiches
+ */
 function getPersonneListeDiffusion(id){
     var tmpid = id;
 
@@ -140,7 +169,6 @@ BpPlusLD.click(
 BpPlusE.click(
     function(){
     
-        console.log("ici");
 
         if(ListeDiffusionEmail.val() == "")
             return;
@@ -154,10 +182,24 @@ BpPlusE.click(
             data: {"nomFonction" : "addPersonneListeDiffusion", "idListeDiffusion" : tabEmail.data("id") , "email" : ListeDiffusionEmail.val()},
             success: 
             function(oRep){
-                console.log("email ajouter");
-                getPersonneListeDiffusion( tabEmail.data("id") );
+                //console.log("email ajouter");
+                
+                tabEmail.prepend( 
+                    refTrE
+                        .clone(true)
+                        .append( $("<th>")
+                                    .html( ListeDiffusionEmail.val() )
+                                    .append( BpMoins.clone(true)
+                                                    .data("personne_a_contacter" , ListeDiffusionEmail.val()) )
+                        )
+                );
+
+
+            
 
                 ListeDiffusionEmail.val("");
+
+                
       
                  
             },
